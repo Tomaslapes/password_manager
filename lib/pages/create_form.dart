@@ -14,6 +14,8 @@ class _CreateFormState extends State<CreateForm> {
   String? _uname;
   String? _password;
 
+  double password_strength = 0.0;
+
   // Formfield helper methods
   Widget _buildName(){
     return TextFormField(
@@ -67,6 +69,38 @@ class _CreateFormState extends State<CreateForm> {
           return "Password field cannot be left empty";
         }
       },
+      onChanged: (value){
+        setState(() {
+          password_strength = 0.0;
+          if (RegExp(
+              r"(?=.*?[A-Z])" //At least one upper case
+          ).hasMatch(value)){
+            password_strength += 0.2;
+          }
+          if (RegExp(
+              r"(?=.*?[a-z])" //At least one lower case
+          ).hasMatch(value)){
+            password_strength += 0.2;
+          }
+          if (RegExp(
+              r"(?=.*?[0-9])" //At least one digit
+          ).hasMatch(value)){
+            password_strength += 0.2;
+          }
+          if (RegExp(
+              r"(?=.*?[#?!@$%^&*-])" //At least one special character
+          ).hasMatch(value)){
+            password_strength += 0.2;
+          }
+          if (RegExp(
+              r".{8,}" //min 8 chars
+          ).hasMatch(value)){
+            password_strength += 0.2;
+          }
+
+          print(password_strength);
+        });
+      },
       onSaved: (String? value){
         _password = value;
         print(_password);
@@ -92,6 +126,12 @@ class _CreateFormState extends State<CreateForm> {
               _buildName(),
               _buildUName(),
               _buildPassword(),
+              SizedBox(height: 20,),
+              Text("Password Strength"),
+              LinearProgressIndicator(
+                value: password_strength
+              ),
+              SizedBox(height: 40,),
               ElevatedButton(onPressed: (){
                 bool res = _formKey.currentState?.validate() ?? false;
                 if (!res){

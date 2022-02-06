@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:password_manager/utils/password_model.dart';
+import 'package:flutter/services.dart';
 
 class PasswordDetailScreen extends StatefulWidget {
   Password password;
@@ -17,11 +18,23 @@ class _PasswordDetailScreenState extends State<PasswordDetailScreen> {
     setState(() {});
   }
 
+  Widget CopyToClipboard(String data){
+    return IconButton(onPressed: () {
+      Clipboard.setData(ClipboardData(text: data));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Row(children: [
+          Icon(Icons.check_circle_rounded,color: Colors.lightGreenAccent,),
+          Text("Zkopírováno do schránky!")
+        ],)),
+      );
+    }, icon: Icon(Icons.copy));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Detail: ${widget.password.name}",overflow: TextOverflow.ellipsis,),
+        title: Text("Detail: ${widget.password.name}",overflow: TextOverflow.fade,maxLines: 1,),
       ),
       body: Container(
         padding: EdgeInsets.all(20),
@@ -38,21 +51,23 @@ class _PasswordDetailScreenState extends State<PasswordDetailScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Název: "),
-                    Flexible(child: Text(widget.password.name,overflow: TextOverflow.ellipsis))
+                    Expanded(child: Text(widget.password.name,overflow: TextOverflow.ellipsis,maxLines: 1,)),
+                    CopyToClipboard(widget.password.name)
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Uživatelské jméno: "),
-                    Flexible(child: Text(widget.password.uname,overflow: TextOverflow.ellipsis,maxLines: 3))
+                    Expanded(child: Text(widget.password.uname,overflow: TextOverflow.ellipsis,maxLines: 3)),
+                    CopyToClipboard(widget.password.uname)
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Heslo: "),
-                    Flexible(child: Text(widget.password.password ?? "••••••••••",maxLines: 3,)),
+                    Expanded(child: Text(widget.password.password ?? "••••••••••",maxLines: 3,)),
                     IconButton(onPressed: (){
                       if(widget.password.password!=null){
                         setState(() {
@@ -66,6 +81,9 @@ class _PasswordDetailScreenState extends State<PasswordDetailScreen> {
                       widget.password.password==null ?
                         Icons.remove_red_eye : Icons.visibility_off
                     )),
+                    if(widget.password.password!=null) ...[
+                      CopyToClipboard(widget.password.password!)
+                      ],
                   ],
                 )
               ],
