@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../utils/utils.dart';
 import '../widgets/register_widget.dart';
+import '../widgets/login_widget.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -26,9 +27,9 @@ class _LoginScreenState extends State<LoginScreen> {
               if(snapshot.data == null){
                 // null safety
                 return Text("Something went wrong");
-              }else if(snapshot.data == true){
+              }else if(snapshot.data == true && !_loginManager.userLoggedIn){
                 // Login screen
-                return Text("Login");
+                return LoginUserWidget(_loginManager);
               }else{
                 // Register a new password
                 return RegisterUserWidget(_loginManager);
