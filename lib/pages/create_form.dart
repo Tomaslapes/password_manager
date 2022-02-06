@@ -106,8 +106,7 @@ class _CreateFormState extends State<CreateForm> {
                   uname:_uname!, // so null check is not necessary here
                   password:_password
                 );
-                DB.instance.savePassword(password);
-
+                DB.instance.savePassword(password,(context)=>Navigator.pop(context));
 
               }, child: Text("Ulozit"))
             ],

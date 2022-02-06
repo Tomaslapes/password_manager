@@ -46,7 +46,7 @@ class DB{
     return passwordList;
   }
 
-  void savePassword(Password password) async{
+  void savePassword(Password password,Function callback) async{
     // encrypt the password using the
 
     Database db = await instance.database;
@@ -56,7 +56,12 @@ class DB{
               print(_id);
               storage.write(key: _id.toString(), value: password.password);
             });
+    callback();
 
+  }
+
+  Future<String> getPassword(int id) async{
+    return await storage.read(key: id.toString()) ?? "";
   }
 
 

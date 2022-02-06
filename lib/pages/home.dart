@@ -5,11 +5,11 @@ import '../widgets/password_tile.dart';
 import '../pages/create_form.dart';
 
 class HomeScreen extends StatefulWidget {
-  List<Password> mock_data = [
-    Password(
-      name:"Google",uname:"TomasLapes"),
-    Password(name:"Amazon",uname: "tomlap")
-  ];
+  // List<Password> mock_data = [
+  //   Password(
+  //     name:"Google",uname:"TomasLapes"),
+  //   Password(name:"Amazon",uname: "tomlap")
+  // ];
 
   HomeScreen({Key? key}) : super(key: key);
 
