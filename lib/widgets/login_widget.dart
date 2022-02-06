@@ -29,6 +29,7 @@ class _LoginUserWidgetState extends State<LoginUserWidget> {
             child: TextFormField(
               autocorrect: false,
               enableSuggestions: false,
+              obscureText: true,
               decoration: InputDecoration(label: Text("Master password")),
               validator: (String? value){
                 if(value?.isEmpty??true){

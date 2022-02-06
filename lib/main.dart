@@ -3,6 +3,8 @@ import 'pages/home.dart';
 import 'pages/login_page.dart';
 
 void main() {
+  // Needed because of DB
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
