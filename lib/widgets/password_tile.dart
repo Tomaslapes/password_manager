@@ -19,16 +19,22 @@ class PasswordTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Icon(Icons.vpn_key_outlined),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(15,0,15,0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Test1"),
-                Text("Test2")
-              ],
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(15,0,15,0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(password!.name),
+                  Text(password!.uname)
+                ],
+              ),
             ),
-          )
+          ),
+          ElevatedButton.icon(onPressed: (){},
+            icon: Icon(Icons.remove_red_eye),
+            label: Text("Detail"),)
         ],
       ),
     );

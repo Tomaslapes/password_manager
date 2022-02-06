@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:password_manager/utils/db.dart';
 import '../utils/password_model.dart';
 import '../widgets/password_tile.dart';
+import '../pages/create_form.dart';
 
 class HomeScreen extends StatefulWidget {
   List<Password> mock_data = [
@@ -49,7 +50,10 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: (){},
+        onPressed: (){
+          Navigator.push(context,
+          MaterialPageRoute(builder: (context)=>CreateForm()));
+        },
       ),
     );
   }

@@ -17,5 +17,11 @@ class Password{
     };
   }
 
+  void savePassword(Password password) async{
+    if (password.password!=null){
+
+    }
+  }
+
 
 }
