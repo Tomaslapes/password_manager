@@ -6,7 +6,7 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
 class DB{
-  //TODO explain/doc this class
+  /// Helper class for Database initialization and use
 
   final storage = FlutterSecureStorage();
 
@@ -22,7 +22,7 @@ class DB{
     String path = join(documentsDirectory.path,"credentials2.db");
     return await openDatabase(
       path,
-      version: 1, // more convenient
+      version: 1,
       onCreate: _onCreate,
     );
   }
@@ -47,8 +47,6 @@ class DB{
   }
 
   void savePassword(Password password,Function callback) async{
-    // encrypt the password using the
-
     Database db = await instance.database;
     // db.insert takes a map
     await db.insert("credentials", password.toMap()).then(

@@ -3,6 +3,8 @@ import 'package:password_manager/utils/db.dart';
 
 
 class Password{
+  /// Class that represents a password with methods to effectively use passwords
+
   final int? id;
   final String name;
   final String uname;

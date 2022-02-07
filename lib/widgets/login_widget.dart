@@ -23,7 +23,7 @@ class _LoginUserWidgetState extends State<LoginUserWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("Login"),
+          Text("Přihlasit se", style: Theme.of(context).textTheme.headline3),
           Form(
             key: _formKey,
             child: TextFormField(
@@ -33,7 +33,7 @@ class _LoginUserWidgetState extends State<LoginUserWidget> {
               decoration: InputDecoration(label: Text("Master password")),
               validator: (String? value){
                 if(value?.isEmpty??true){
-                  return "Password is missing";
+                  return "Heslo nesmí být prázdné";
                 }
               },
               onSaved: (String? value) {
@@ -55,6 +55,7 @@ class _LoginUserWidgetState extends State<LoginUserWidget> {
                 // Register the user
                 showDialog(context: context, builder: (_){
                   return AlertDialog(
+
                       content: Container(
                         height: 100,
                         width: 100,
@@ -73,7 +74,7 @@ class _LoginUserWidgetState extends State<LoginUserWidget> {
                                   ),
                                 );
                               }else{
-                                return Text("The password is wrong");
+                                return Center(child: Text("Nesprávné heslo!"));
                               }
                             }else if(snapshot.hasError){
                               return Text("Something went wrong.");
@@ -90,7 +91,7 @@ class _LoginUserWidgetState extends State<LoginUserWidget> {
                 _formKey.currentState
                     ?.save(); // will always succeeds but the linter does not see it
               },
-              child: Text("Login"))
+              child: Text("Přihlasit se"))
         ],
       ),
     );

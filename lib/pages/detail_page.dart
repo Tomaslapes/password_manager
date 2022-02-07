@@ -50,8 +50,11 @@ class _PasswordDetailScreenState extends State<PasswordDetailScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Název: "),
-                    Expanded(child: Text(widget.password.name,overflow: TextOverflow.ellipsis,maxLines: 1,)),
+                    Text("Název: ", style: Theme.of(context).textTheme.bodyText2),
+                    Expanded(child: Text(
+                      widget.password.name,overflow: TextOverflow.ellipsis,maxLines: 1,
+                      style: Theme.of(context).textTheme.bodyText1
+                    )),
                     CopyToClipboard(widget.password.name)
                   ],
                 ),
@@ -59,7 +62,8 @@ class _PasswordDetailScreenState extends State<PasswordDetailScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Uživatelské jméno: "),
-                    Expanded(child: Text(widget.password.uname,overflow: TextOverflow.ellipsis,maxLines: 3)),
+                    Expanded(child: Text(widget.password.uname,overflow: TextOverflow.ellipsis,maxLines: 3,
+                        style: Theme.of(context).textTheme.bodyText1)),
                     CopyToClipboard(widget.password.uname)
                   ],
                 ),
@@ -67,7 +71,9 @@ class _PasswordDetailScreenState extends State<PasswordDetailScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Heslo: "),
-                    Expanded(child: Text(widget.password.password ?? "••••••••••",maxLines: 3,)),
+                    Expanded(child: Text(widget.password.password ?? "••••••••••",maxLines: 3,
+                        style: Theme.of(context).textTheme.bodyText1),
+                    ),
                     IconButton(onPressed: (){
                       if(widget.password.password!=null){
                         setState(() {
@@ -76,7 +82,6 @@ class _PasswordDetailScreenState extends State<PasswordDetailScreen> {
                         return;
                       }
                       widget.password.loadPassword(callback);
-                      print("Show password");
                     }, icon: Icon(
                       widget.password.password==null ?
                         Icons.remove_red_eye : Icons.visibility_off

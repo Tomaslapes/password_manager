@@ -20,7 +20,7 @@ class _CreateFormState extends State<CreateForm> {
   Widget _buildName(){
     return TextFormField(
       decoration: const InputDecoration(
-          labelText: "Name"
+          labelText: "Název"
       ),
       validator: (String? value){
         if (value == null){
@@ -40,7 +40,7 @@ class _CreateFormState extends State<CreateForm> {
   Widget _buildUName(){
     return TextFormField(
       decoration: const InputDecoration(
-          labelText: "Username"
+          labelText: "Uživatelksé jméno"
       ),
       validator: (String? value){
         if (value == null){
@@ -59,7 +59,7 @@ class _CreateFormState extends State<CreateForm> {
   Widget _buildPassword(){
     return TextFormField(
       decoration: const InputDecoration(
-          labelText: "Password"
+          labelText: "Heslo",
       ),
       validator: (String? value){
         if (value == null){
@@ -98,12 +98,12 @@ class _CreateFormState extends State<CreateForm> {
             password_strength += 0.2;
           }
 
-          print(password_strength);
+          // print(password_strength);
         });
       },
       onSaved: (String? value){
         _password = value;
-        print(_password);
+        // print(_password);
       },
     );
   }
@@ -115,7 +115,7 @@ class _CreateFormState extends State<CreateForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("New password"),
+        title: Text("Nové heslo"),
       ),
       body: Container(
         padding: EdgeInsets.all(20.0),
@@ -127,7 +127,7 @@ class _CreateFormState extends State<CreateForm> {
               _buildUName(),
               _buildPassword(),
               SizedBox(height: 20,),
-              Text("Password Strength"),
+              Text("Síla hesla"),
               LinearProgressIndicator(
                 value: password_strength
               ),
@@ -148,7 +148,7 @@ class _CreateFormState extends State<CreateForm> {
                 );
                 DB.instance.savePassword(password,(context)=>Navigator.pop(context));
 
-              }, child: Text("Ulozit"))
+              }, child: Text("Uložit"))
             ],
           ),
         ),
