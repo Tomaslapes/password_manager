@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import '../utils/utils.dart';
 
 class RegisterUserWidget extends StatefulWidget {
-  LoginManager? loginManager;
+  late final LoginManager loginManager;
 
-  RegisterUserWidget(LoginManager this.loginManager, {Key? key})
+  RegisterUserWidget(this.loginManager, {Key? key})
       : super(key: key);
 
   @override
@@ -19,18 +19,18 @@ class _RegisterUserWidgetState extends State<RegisterUserWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("Create a new password"),
+          const Text("Create a new password"),
           Form(
             key: _formKey,
             child: TextFormField(
               autocorrect: false,
               enableSuggestions: false,
-              decoration: InputDecoration(label: Text("Master password")),
+              decoration: const InputDecoration(label: Text("Master password")),
               validator: (String? value){
                 if(value?.isEmpty??true){
                   return "Password is missing";
@@ -48,7 +48,7 @@ class _RegisterUserWidgetState extends State<RegisterUserWidget> {
                 // Validate the form
                 bool res = _formKey.currentState?.validate() ?? false;
                 if (!res) {
-                  print("_formkey is null");
+                  // print("_formkey is null");
                   return;
                 }
 
@@ -59,26 +59,26 @@ class _RegisterUserWidgetState extends State<RegisterUserWidget> {
                       height: 100,
                       width: 100,
                       child: FutureBuilder(
-                        future:  widget.loginManager!.registerPassword(_password!),
+                        future:  widget.loginManager.registerPassword(_password!),
                         builder: (context, snapshot){
                           if(snapshot.hasData){
                             if(snapshot.data==true){
                               //Success
-                              widget.loginManager!.goHome(context);
+                              widget.loginManager.goHome(context);
                               
-                              return Center(
+                              return const Center(
                                 child: Icon(Icons.check_circle_rounded,
                                   color: Colors.lightGreenAccent,
                                   size: 50,
                                 ),
                               );
                             }else{
-                              return Text("Something went wrong.");
+                              return const Text("Something went wrong.");
                             }
                           }else if(snapshot.hasError){
-                            return Text("Something went wrong.");
+                            return const Text("Something went wrong.");
                           }else{
-                            return Center(child: CircularProgressIndicator());
+                            return const Center(child: CircularProgressIndicator());
                           }
                           ;
                         },
@@ -90,7 +90,7 @@ class _RegisterUserWidgetState extends State<RegisterUserWidget> {
                 _formKey.currentState
                     ?.save(); // will always succeeds but the linter does not see it
               },
-              child: Text("Create new Password"))
+              child: const Text("Create new Password"))
         ],
       ),
     );

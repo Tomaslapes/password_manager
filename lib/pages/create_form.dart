@@ -20,7 +20,7 @@ class _CreateFormState extends State<CreateForm> {
   Widget _buildName(){
     return TextFormField(
       decoration: const InputDecoration(
-          labelText: "Název"
+          labelText: "Name"
       ),
       validator: (String? value){
         if (value == null){
@@ -40,7 +40,7 @@ class _CreateFormState extends State<CreateForm> {
   Widget _buildUName(){
     return TextFormField(
       decoration: const InputDecoration(
-          labelText: "Uživatelksé jméno"
+          labelText: "Username"
       ),
       validator: (String? value){
         if (value == null){
@@ -59,7 +59,7 @@ class _CreateFormState extends State<CreateForm> {
   Widget _buildPassword(){
     return TextFormField(
       decoration: const InputDecoration(
-          labelText: "Heslo",
+          labelText: "Password"
       ),
       validator: (String? value){
         if (value == null){
@@ -98,12 +98,12 @@ class _CreateFormState extends State<CreateForm> {
             password_strength += 0.2;
           }
 
-          // print(password_strength);
+          print(password_strength);
         });
       },
       onSaved: (String? value){
         _password = value;
-        // print(_password);
+        print(_password);
       },
     );
   }
@@ -115,7 +115,7 @@ class _CreateFormState extends State<CreateForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Nové heslo"),
+        title: Text("New password"),
       ),
       body: Container(
         padding: EdgeInsets.all(20.0),
@@ -127,7 +127,7 @@ class _CreateFormState extends State<CreateForm> {
               _buildUName(),
               _buildPassword(),
               SizedBox(height: 20,),
-              Text("Síla hesla"),
+              Text("Password Strength"),
               LinearProgressIndicator(
                 value: password_strength
               ),
@@ -146,9 +146,9 @@ class _CreateFormState extends State<CreateForm> {
                   uname:_uname!, // so null check is not necessary here
                   password:_password
                 );
-                DB.instance.savePassword(password,(context)=>Navigator.pop(context));
+                DB.instance.savePassword(password,()=>Navigator.pop(context));
 
-              }, child: Text("Uložit"))
+              }, child: Text("Ulozit"))
             ],
           ),
         ),

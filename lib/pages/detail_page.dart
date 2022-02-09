@@ -22,12 +22,12 @@ class _PasswordDetailScreenState extends State<PasswordDetailScreen> {
     return IconButton(onPressed: () {
       Clipboard.setData(ClipboardData(text: data));
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Row(children: [
+        SnackBar(content: Row(children: const [
           Icon(Icons.check_circle_rounded,color: Colors.lightGreenAccent,),
           Text("Zkopírováno do schránky!")
         ],)),
       );
-    }, icon: Icon(Icons.copy));
+    }, icon: const Icon(Icons.copy));
   }
 
   @override
@@ -37,7 +37,7 @@ class _PasswordDetailScreenState extends State<PasswordDetailScreen> {
         title: Text("Detail: ${widget.password.name}",overflow: TextOverflow.fade,maxLines: 1,),
       ),
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Center(
           child: Container(
             width: 325,
@@ -50,11 +50,8 @@ class _PasswordDetailScreenState extends State<PasswordDetailScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Název: ", style: Theme.of(context).textTheme.bodyText2),
-                    Expanded(child: Text(
-                      widget.password.name,overflow: TextOverflow.ellipsis,maxLines: 1,
-                      style: Theme.of(context).textTheme.bodyText1
-                    )),
+                    Text("Název: "),
+                    Expanded(child: Text(widget.password.name,overflow: TextOverflow.ellipsis,maxLines: 1,)),
                     CopyToClipboard(widget.password.name)
                   ],
                 ),
@@ -62,8 +59,7 @@ class _PasswordDetailScreenState extends State<PasswordDetailScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Uživatelské jméno: "),
-                    Expanded(child: Text(widget.password.uname,overflow: TextOverflow.ellipsis,maxLines: 3,
-                        style: Theme.of(context).textTheme.bodyText1)),
+                    Expanded(child: Text(widget.password.uname,overflow: TextOverflow.ellipsis,maxLines: 3)),
                     CopyToClipboard(widget.password.uname)
                   ],
                 ),
@@ -71,9 +67,7 @@ class _PasswordDetailScreenState extends State<PasswordDetailScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Heslo: "),
-                    Expanded(child: Text(widget.password.password ?? "••••••••••",maxLines: 3,
-                        style: Theme.of(context).textTheme.bodyText1),
-                    ),
+                    Expanded(child: Text(widget.password.password ?? "••••••••••",maxLines: 3,)),
                     IconButton(onPressed: (){
                       if(widget.password.password!=null){
                         setState(() {
@@ -82,6 +76,7 @@ class _PasswordDetailScreenState extends State<PasswordDetailScreen> {
                         return;
                       }
                       widget.password.loadPassword(callback);
+                      print("Show password");
                     }, icon: Icon(
                       widget.password.password==null ?
                         Icons.remove_red_eye : Icons.visibility_off

@@ -24,35 +24,35 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(title: Text("Přihlašovací údaje")),
       body: FutureBuilder<List<Password>>(
         future: DB.instance.getPasswordCredentials(),
-        builder: (context, snapshot){
-          if(snapshot.hasData){
-            if(snapshot.data!.isNotEmpty){
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            if (snapshot.data!.isNotEmpty) {
               return Container(
                 child: ListView.builder(
                   itemCount: snapshot.data!.length,
-                  itemBuilder: (context, index){
+                  itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.fromLTRB(10,10,10,0),
+                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                       child: PasswordTile(snapshot.data![index]),
                     );
                   },
                 ),
               );
-            }else {
+            } else {
               return Center(child: Text("Nemáte žádné přihlašovací údaje"));
             }
-          }else if (snapshot.hasError){
+          } else if (snapshot.hasError) {
             return Text("Something went wrong");
-          }else{
+          } else {
             return CircularProgressIndicator();
           }
         },
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: (){
-          Navigator.push(context,
-          MaterialPageRoute(builder: (context)=>CreateForm()));
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => CreateForm())).then((value) => setState((){}));
         },
       ),
     );

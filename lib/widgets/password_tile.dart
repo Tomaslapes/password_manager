@@ -3,7 +3,7 @@ import 'package:password_manager/pages/detail_page.dart';
 import '../utils/password_model.dart';
 
 class PasswordTile extends StatelessWidget {
-  Password? password;
+  late final Password password;
   PasswordTile(this.password, {Key? key}) : super(key: key);
 
   @override
@@ -12,13 +12,13 @@ class PasswordTile extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           border: Border.all(color: Colors.black12, width: 1)),
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       height: 100,
       // width: MediaQuery.of(context).size.width,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(Icons.vpn_key_outlined),
+          const Icon(Icons.vpn_key_outlined),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
@@ -29,12 +29,12 @@ class PasswordTile extends StatelessWidget {
                   Flexible(
                     child: Container(
                       child: Text(
-                        password!.name,
+                        password.name,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ),
-                  Text(password!.uname)
+                  Text(password.uname)
                 ],
               ),
             ),
@@ -44,10 +44,10 @@ class PasswordTile extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => PasswordDetailScreen(password!)));
+                      builder: (context) => PasswordDetailScreen(password)));
             },
-            icon: Icon(Icons.remove_red_eye),
-            label: Text("Detail"),
+            icon: const Icon(Icons.remove_red_eye),
+            label: const Text("Detail"),
           )
         ],
       ),
